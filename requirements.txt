@@ -1,0 +1,4 @@
+tensorflow==2.14.0
+dvc==3.27.0
+dvclive==3.1.0
+tensorflow-datasets==4.9.3

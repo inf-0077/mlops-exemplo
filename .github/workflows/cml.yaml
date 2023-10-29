@@ -20,7 +20,7 @@ jobs:
           echo "Starting"
 
           pip install -r requirements.txt  # Install dependencies
-          dvc pull data --run-cache        # Pull data
+          dvc pull --run-cache        # Pull data
           dvc repro                        # Reproduce pipeline
       - name: Create CML report
         env:

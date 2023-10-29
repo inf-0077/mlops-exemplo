@@ -3,6 +3,8 @@ stages:
     cmd: python src/main.py
     deps:
     - src
+    - ds
+    - params.yaml
 
 params:
 - params.yaml

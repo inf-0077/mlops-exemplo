@@ -7,11 +7,18 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.9'
+          cache: 'pip' # caching pip dependencie
       - uses: iterative/setup-cml@v1
       - uses: iterative/setup-dvc@v1
       - name: Train model
         run: |
+          # GAMBIARRA PARA USAR GDRIVE
+          mkdir -p ./.dvc/.gdrive
+          echo ${{ secrets.GDRIVE }} > ./.dvc/.gdrive/inf0077.json
+
+          echo "Starting"
+
           pip install -r requirements.txt  # Install dependencies
           dvc pull data --run-cache        # Pull data
           dvc repro                        # Reproduce pipeline

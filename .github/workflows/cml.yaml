@@ -16,7 +16,7 @@ jobs:
           # GAMBIARRA PARA USAR GDRIVE - Obtenha o seu inf0077.json da sua máquina e crie no GitHub ACTIONS
           mkdir -p ./.dvc/.gdrive
           echo ${{ secrets.GDRIVE }} > ./.dvc/.gdrive/inf0077.json
-
+          head -c 15 ./.dvc/.gdrive/inf0077.json
           echo "Starting"
 
           pip install -r requirements.txt  # Install dependencies

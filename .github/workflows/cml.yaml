@@ -13,7 +13,7 @@ jobs:
       - uses: iterative/setup-dvc@v1
       - name: Train model
         run: |
-          # GAMBIARRA PARA USAR GDRIVE
+          # GAMBIARRA PARA USAR GDRIVE - Obtenha o seu inf0077.json da sua máquina e crie no GitHub ACTIONS
           mkdir -p ./.dvc/.gdrive
           echo ${{ secrets.GDRIVE }} > ./.dvc/.gdrive/inf0077.json
 
@@ -26,7 +26,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # GAMBIARRA PARA USAR GDRIVE
+          # GAMBIARRA PARA USAR GDRIVE - Obtenha o seu inf0077.json da sua máquina e crie no GitHub ACTIONS
           mkdir -p ./.dvc/.gdrive
           echo ${{ secrets.GDRIVE }} > ./.dvc/.gdrive/inf0077.json
 

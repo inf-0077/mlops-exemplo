@@ -24,33 +24,43 @@ jobs:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "1"
           echo "## Metrics: workflow vs. main" >> report.md
+          echo "2"
           git fetch --depth=1 origin main:main
-
+          echo "3"
           dvc metrics diff main --md >> report.md
-
+          echo "4"
           echo "### Training loss" >> report.md
+          echo "5"
           dvc plots diff \
             --target dvclive/plots/metrics/train/loss.tsv --show-vega main > vega.json
+          echo "6"
           vl2png vega.json > plot-loss.png
+          echo "7"
           echo '![](./plot-loss.png "Training Loss")' >> report.md
-
+          echo "8"
           echo "### Training accuracy" >> report.md
           dvc plots diff \
             --target dvclive/plots/metrics/train/accuracy.tsv --show-vega main > vega.json
+          echo "9"
           vl2png vega.json > plot-accuracy.png
           echo '![](./plot-accuracy.png "Training Accuracy")' >> report.md
-
+          echo "10"
           echo "### Eval loss" >> report.md
           dvc plots diff \
             --target dvclive/plots/metrics/eval/loss.tsv --show-vega main > vega.json
+          echo "11"
           vl2png vega.json > plot-loss.png
           echo '![](./plot-loss.png "Eval Loss")' >> report.md
+          echo "12"
 
           echo "### Eval accuracy" >> report.md
           dvc plots diff \
             --target dvclive/plots/metrics/eval/accuracy.tsv --show-vega main > vega.json
+          echo "13"
           vl2png vega.json > plot-accuracy.png
           echo '![](./plot-accuracy.png "Eval Accuracy")' >> report.md
-
+          echo "14"
           cml comment create report.md
+          echo "15"

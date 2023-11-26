@@ -22,7 +22,7 @@ jobs:
       - name: Create CML report
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_TOKEN: ${{ secrets.TOKEN }}
         run: |
           echo "1"
           echo "## Metrics: workflow vs. main" >> report.md

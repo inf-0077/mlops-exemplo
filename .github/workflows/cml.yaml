@@ -27,7 +27,7 @@ jobs:
           echo "## Metrics: workflow vs. main" >> report.md
           git fetch --depth=1 origin main:main
 
-          dvc metrics diff master --md >> report.md
+          dvc metrics diff main --md >> report.md
 
           echo "### Training loss" >> report.md
           dvc plots diff \

@@ -15,24 +15,15 @@ jobs:
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
-          # GAMBIARRA PARA USAR GDRIVE - Obtenha o seu inf0077.json da sua máquina e crie no GitHub ACTIONS
-          #mkdir -p ./.dvc/.gdrive
-          #echo ${{ secrets.GDRIVE }} > ./.dvc/.gdrive/inf0077.json
-          #head -c 15 ./.dvc/.gdrive/inf0077.json
           echo "Starting"
-
           pip install -r requirements.txt  # Install dependencies
-          dvc pull --run-cache        # Pull data
+          dvc pull                         # Pull data
           dvc repro                        # Reproduce pipeline
       - name: Create CML report
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # GAMBIARRA PARA USAR GDRIVE - Obtenha o seu inf0077.json da sua máquina e crie no GitHub ACTIONS
-          #mkdir -p ./.dvc/.gdrive
-          #echo ${{ secrets.GDRIVE }} > ./.dvc/.gdrive/inf0077.json
-
           echo "## Metrics: workflow vs. main" >> report.md
           git fetch --depth=1 origin main:main
 

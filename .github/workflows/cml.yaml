@@ -62,5 +62,5 @@ jobs:
           vl2png vega.json > plot-accuracy.png
           echo '![](./plot-accuracy.png "Eval Accuracy")' >> report.md
           echo "14"
-          cml comment create --target=pr --publish report.md
+          cml comment create --target=commit --publish report.md
           echo "15"

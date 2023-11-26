@@ -9,7 +9,7 @@ jobs:
         with:
           python-version: '3.9'
           cache: 'pip' # caching pip dependencie
-      - uses: iterative/setup-cml@v1
+      - uses: iterative/setup-cml@v2
       - uses: iterative/setup-dvc@v1
       - name: Train model
         env:

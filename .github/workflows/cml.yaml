@@ -24,6 +24,8 @@ jobs:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          npm i -g @dvcorg/cml@0.19.1
+          cml --version
           echo "1"
           echo "## Metrics: workflow vs. main" >> report.md
           echo "2"

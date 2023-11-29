@@ -2,6 +2,6 @@ input_height: 224
 input_width: 224
 input_channels: 3
 batch_size: 64
-epochs: 2
+epochs: 10
 verbose: 1
 model_filepath: "./model.keras"

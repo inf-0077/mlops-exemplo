@@ -56,5 +56,5 @@ jobs:
             --target dvclive/plots/metrics/eval/accuracy.tsv --show-vega main > vega.json
           vl2png vega.json > plot-accuracy.png
           echo '![](./plot-accuracy.png "Eval Accuracy")' >> report.md
-          cml comment create --target=pr/1 --publish report.md
+          cml comment create --target=pr --publish report.md
 

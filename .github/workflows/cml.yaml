@@ -9,54 +9,49 @@ jobs:
         with:
           python-version: '3.9'
           cache: 'pip' # caching pip dependencie
-      - uses: iterative/setup-cml@v1
+      - uses: iterative/setup-cml@v2
       - uses: iterative/setup-dvc@v1
       - name: Train model
-        run: |
-          # GAMBIARRA PARA USAR GDRIVE
-          mkdir -p ./.dvc/.gdrive
-          echo ${{ secrets.GDRIVE }} > ./.dvc/.gdrive/inf0077.json
-
-          echo "Starting"
-
-          pip install -r requirements.txt  # Install dependencies
-          dvc pull --run-cache        # Pull data
-          dvc repro                        # Reproduce pipeline
-      - name: Create CML report
         env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
-          # GAMBIARRA PARA USAR GDRIVE
-          mkdir -p ./.dvc/.gdrive
-          echo ${{ secrets.GDRIVE }} > ./.dvc/.gdrive/inf0077.json
+          echo "Starting"
+          pip install -r requirements.txt  # Install dependencies
+          dvc pull --verbose
+          dvc repro                        # Reproduce pipeline
+#- name: Create CML report
+#        env:
+#          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+#          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          # npm i -g @dvcorg/cml@0.19.1
+#          cml --version
+#
+#          echo "## Metrics: workflow vs. main" >> report.md
+#          git fetch --depth=1 origin main:main
+#          dvc metrics diff main --md >> report.md
+#          echo "### Training loss" >> report.md
+#          dvc plots diff \
+#            --target dvclive/plots/metrics/train/loss.tsv --show-vega main > vega.json
+#          vl2png vega.json > plot-loss.png
+#
+#          echo '![](./plot-loss.png "Training Loss")' >> report.md
+#          echo "### Training accuracy" >> report.md
+#          dvc plots diff \
+#            --target dvclive/plots/metrics/train/accuracy.tsv --show-vega main > vega.json
+#
+#          vl2png vega.json > plot-accuracy.png
+#          echo '![](./plot-accuracy.png "Training Accuracy")' >> report.md
+#          echo "### Eval loss" >> report.md
+#          dvc plots diff \
+#            --target dvclive/plots/metrics/eval/loss.tsv --show-vega main > vega.json
+#          vl2png vega.json > plot-loss.png
+#          echo '![](./plot-loss.png "Eval Loss")' >> report.md
+#
+#          echo "### Eval accuracy" >> report.md
+#          dvc plots diff \
+#            --target dvclive/plots/metrics/eval/accuracy.tsv --show-vega main > vega.json
+#          vl2png vega.json > plot-accuracy.png
+#          echo '![](./plot-accuracy.png "Eval Accuracy")' >> report.md
+#          cml comment create --target=pr/1 --publish report.md
 
-          echo "## Metrics: workflow vs. main" >> report.md
-          git fetch --depth=1 origin main:main
-
-          dvc metrics diff master --show-md >> report.md
-
-          echo "### Training loss" >> report.md
-          dvc plots diff \
-            --target dvclive/plots/metrics/train/loss.tsv --show-vega main > vega.json
-          vl2png vega.json > plot-loss.png
-          echo '![](./plot-loss.png "Training Loss")' >> report.md
-
-          echo "### Training accuracy" >> report.md
-          dvc plots diff \
-            --target dvclive/plots/metrics/train/accuracy.tsv --show-vega main > vega.json
-          vl2png vega.json > plot-accuracy.png
-          echo '![](./plot-accuracy.png "Training Accuracy")' >> report.md
-
-          echo "### Eval loss" >> report.md
-          dvc plots diff \
-            --target dvclive/plots/metrics/eval/loss.tsv --show-vega main > vega.json
-          vl2png vega.json > plot-loss.png
-          echo '![](./plot-loss.png "Eval Loss")' >> report.md
-
-          echo "### Eval accuracy" >> report.md
-          dvc plots diff \
-            --target dvclive/plots/metrics/eval/accuracy.tsv --show-vega main > vega.json
-          vl2png vega.json > plot-accuracy.png
-          echo '![](./plot-accuracy.png "Eval Accuracy")' >> report.md
-
-          cml comment create report.md

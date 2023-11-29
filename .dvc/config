@@ -1,5 +1,4 @@
 [core]
     remote = gdrive
 ['remote "gdrive"']
-    url = gdrive://1hAt9cMhP1dQ_meENt6EeMbJt7C1cABEi
-    gdrive_user_credentials_file = .gdrive/inf0077.json
+    url = gdrive://1pJjf2uimV2gvJ3J4Ihd7YWQGfCjcyHQ2
